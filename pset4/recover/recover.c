@@ -42,19 +42,18 @@ int main(int argc, char *argv[])
             {
                 fclose(outptr);
             }
-
-            counter++;
             // write correct output file name
             sprintf(outfile, "%03i.jpg", counter);
             // creates and writes new file
             outptr = fopen(outfile, "w");
-            fwrite(buffer, sizeof(buffer), 1, outptr);
+            fwrite(buffer, 512, 1, outptr);
+            counter++;
         }
         else if (counter > 0)
         {
-            fwrite(buffer, sizeof(buffer), 1, outptr);
+            fwrite(buffer, 512, 1, outptr);
         }
-        fseek(inptr, 512, SEEK_CUR);
+        //fseek(inptr, 512, SEEK_CUR);
     }
 
     // reached the end of the card or some errors occour, close all files
