@@ -1,6 +1,7 @@
 // Implements a dictionary's functionality
 
 #include <stdbool.h>
+#include <strings.h>
 #include <string.h>
 #include "dictionary.h"
 
@@ -13,23 +14,52 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 26 * 26;
 
 // Hash table
-node *table[N] = malloc(N*sizeof(node));
+node *table[N];
+int wordCount = 0;
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
+    int key = hash(word);
+    node *cursor = table[key];
+    //for (node *tmp = table[key]; tmp != NULL; tmp = tmp -> next)
+    //{
+    //    if (strcasecmp(tmp->word, word) == 0)
+    //     {
+    //         return true;
+    //     }
+    // }
+    while (cursor != NULL)
+    {
+        // If the word is in the dictionnary
+        // strcasecmp: is case-insensitive
+        if (strcasecmp(word, cursor->word) == 0)
+        {
+            return true;
+        }
+
+        // Set cursor to next item
+        cursor = cursor->next;
+    }
     return false;
 }
 
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
-    return 0;
+    int h = 0;
+    if (word[1] == '\0')
+    {
+        h = word[0] - 'a';
+    }
+    else
+    {
+        h = 26 * (word[0] - 'a') + (word[1] - 'a');
+    }
+    return h;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -45,70 +75,59 @@ bool load(const char *dictionary)
         return false;
     }
     // Prepare to load dictionary from inout file to hash table
-    int index = 0, words = 0;
-    char dicItem[LENGTH + 1];
-
-    // get each word by characters
-    for (int c = fgetc(file); c != EOF; c = fgetc(file))
+    int index = 0;
+    char *dicItem = malloc(LENGTH);
+    if (dicItem == NULL)
     {
-        // get every characters untill '\n' founded
-        if (c != '\n')
-        {
-            // Append character to word
-            dicItem[index] = c;
-            index++;
-        }
-        // When a whole word founded
-        else
-        {
-            // Terminate current word to a string
-            dicItem[index] = '\0';
-
-            // Update counter
-            words++;
-            // check first character of each whole word to match the hash table
-
-
-            // Prepare for next word
-            index = 0;
-        }
+        return false;
     }
 
-
-
-    return false;
+    // get word by word untill EOF founded
+    while (fscanf(file, "%s", dicItem) != EOF)
+    {
+        // insert current word as a new item into hash table
+        // find hash index for the new item
+        int key = hash(dicItem);
+        // Creates new node for item from dictionary
+        node *n = malloc(sizeof(node));
+        if (n == NULL)
+        {
+            return false;
+        }
+        // assign dicItem characters by characters to new item
+        strcpy(n->word, dicItem);
+        n->next = table[key];
+        table[key] = n;
+        // Track number of words in dictionary
+        wordCount++;
+        // Prepare for next word
+        index = 0;
+    }
+    fclose(file);
+    return true;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
+    if (wordCount > 0)
+    {
+        return wordCount;
+    }
     return 0;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
+    for (int i = 0; i < N; i++)
+    {
+        while (table[i] != NULL)
+        {
+            node *tmp = table[i]->next;
+            free(table[i]);
+            table[i] = tmp;
+        }
+    }
     return false;
-}
-
-// record new word from dictionary into hash table
-void newItem(char *dicItem)
-{
-    // Creates new node for words from dictionary
-    node *n = malloc(sizefo(node));
-    if (n == NULL)
-    {
-        return 1;
-    }
-    int i = 0;
-    while (dicItem[i] != '\0')
-    {
-        n->word[i] = dicItem[i];
-        i++;
-    }
-    // End word with \0
-    n->word[i] = '\0';
-    n->next = NULL;
 }
