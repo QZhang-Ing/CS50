@@ -14,7 +14,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 26 * 26;
+const unsigned int N = 26 * 26 * 26;
 
 // Hash table
 node *table[N];
@@ -25,13 +25,6 @@ bool check(const char *word)
 {
     int key = hash(word);
     node *cursor = table[key];
-    //for (node *tmp = table[key]; tmp != NULL; tmp = tmp -> next)
-    //{
-    //    if (strcasecmp(tmp->word, word) == 0)
-    //     {
-    //         return true;
-    //     }
-    // }
     while (cursor != NULL)
     {
         // If the word is in the dictionnary
@@ -44,6 +37,7 @@ bool check(const char *word)
         // Set cursor to next item
         cursor = cursor->next;
     }
+    free(cursor);
     return false;
 }
 
@@ -51,13 +45,16 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     int h = 0;
+    // if only one letter word appears
     if (word[1] == '\0')
     {
-        h = word[0] - 'a';
+        // change character to lower case to calculate
+        h = tolower(word[0]) - 'a';
     }
+    // in case of words more than one letter
     else
     {
-        h = 26 * (word[0] - 'a') + (word[1] - 'a');
+        h = 26 * 26 * (tolower(word[0]) - 'a') + 26 * (tolower(word[1]) - 'a') + (tolower(word[2]));
     }
     return h;
 }
@@ -75,8 +72,7 @@ bool load(const char *dictionary)
         return false;
     }
     // Prepare to load dictionary from inout file to hash table
-    int index = 0;
-    char *dicItem = malloc(LENGTH);
+    char *dicItem = malloc(LENGTH + 1);
     if (dicItem == NULL)
     {
         return false;
@@ -100,10 +96,9 @@ bool load(const char *dictionary)
         table[key] = n;
         // Track number of words in dictionary
         wordCount++;
-        // Prepare for next word
-        index = 0;
     }
     fclose(file);
+    free(dicItem);
     return true;
 }
 
@@ -129,5 +124,5 @@ bool unload(void)
             table[i] = tmp;
         }
     }
-    return false;
+    return true;
 }
