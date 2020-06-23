@@ -48,9 +48,7 @@ def countSTR(STR, sequence):
     maxcount = 0
     # in order to match repeat STR. for example: "('AATG')+" as pattern
     # into re.compile() to match repeat STR
-    # rewrite STR to "(STR)+"
-    STR = "(" + STR + ")+"
-    pattern = re.compile(r'STR')
+    pattern = re.compile(rf'({STR})+')
     # matches should be a iterator object
     matches = pattern.finditer(sequence)
     # go throgh every repeat and find the longest one
