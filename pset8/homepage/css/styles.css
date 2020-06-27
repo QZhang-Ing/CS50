@@ -1,0 +1,338 @@
+body {
+  font-family: "Quicksand", Arial, sans-serif;
+  background-color: black;
+  height: 100%;
+  width: 100%; 
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: whitesmoke;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  margin: 0 0 30px 0; 
+}
+.fa { 
+  font-size: 1.5em;
+  color: #2c98f0;
+  margin-right: 0.5em;
+}
+a {
+  color: whitesmoke;
+  transition: 0.5s;
+  text-decoration: none !important; 
+}
+
+a:hover, a:active, a:focus {
+  color: rgb(21, 46, 75);
+  outline: none;
+  text-decoration: none !important; 
+}
+
+li {
+  margin: 0 0 10px 0; 
+}
+#fullpage {
+  width: 100%;
+  height: 100%;
+  position: relative; 
+  overflow: hidden;
+}
+.section-title {
+  font-size: 25px !important;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 50px;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.section-title h2:after {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 2px;
+	left: 0;
+	bottom: 0;
+	background: #40424a;
+}
+
+#aside {
+  padding-top: 3em;
+  padding-bottom: 30px;
+  margin-left: 30px;
+  float: left;
+  width: 30%;
+  height: 100%;
+  position: fixed;
+  background-color: rgb(21, 46, 75);
+  overflow-y: auto;
+  
+}
+  #aside #profil-img {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    object-fit: cover; 
+  }
+  #aside #aside-logo {
+    text-decoration: none;
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+  #aside #sublogo {
+    font-size: medium; }
+  #aside #sidebar {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    list-style-type: none;
+    text-transform: uppercase;
+  }
+  #aside #copyright {
+    font-size: 10px;
+    margin-top: 30px;
+    color: rgb(155, 152, 152); 
+  }
+
+#mainpage {
+  width: 60%;
+  float: right;
+  margin-top: 3em;
+  margin-right: 40px; 
+}
+  #mainpage .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    align-items: stretch;
+  }
+  #mainpage .grid > div{
+    padding: 1em;
+    color: whitesmoke;
+  }
+  
+  /*#mainpage .grid > div:nth-child(odd) {
+    background: rgb(155, 152, 152);
+  }*/
+ 
+    #mainpage .grid #aboutme {
+      grid-column: 1/5;
+      grid-row: 1/2;
+    }
+    #mainpage .grid #short-profil {
+      color: whitesmoke;
+      grid-column: 1/5;
+      grid-row: 2/3;
+    }
+    #mainpage .grid #general-info {
+      height: 15px;
+      grid-column: 1/5;
+      grid-row: 3/4;
+      margin-bottom: 20px;
+    }
+    #mainpage .grid #birth {
+      height: 15px;
+      grid-column: 1/2;
+      grid-row: 4/5;
+    }
+    #mainpage .grid #birth-a {
+      height: 15px;
+      grid-column: 2/3;
+      grid-row: 4/5;
+    }
+    #mainpage .grid #address {
+      height: 15px;
+      grid-column: 1/2;
+      grid-row: 7/8;
+    }
+    #mainpage .grid #address-a {
+      height: 15px;
+      grid-column: 2/3;
+      grid-row: 7/8;
+    }
+    #mainpage .grid #mail {
+      height: 15px;
+      grid-column: 1/2;
+      grid-row: 6/7;
+    }
+    #mainpage .grid #mail-a {
+      height: 15px;
+      grid-column: 2/3;
+      grid-row: 6/7;
+    }
+    #mainpage .grid #phone {
+      height: 15px;
+      grid-column: 1/2;
+      grid-row: 5/6;
+    }
+    #mainpage .grid #phone-a {
+      height: 15px;
+      grid-column: 2/3;
+      grid-row: 5/6;
+    }
+    #mainpage .grid #mapmarker{
+      height: 15px;
+      grid-column: 3/5;
+      grid-row: 4/5;
+    }
+    #mainpage .grid #language{
+      grid-column: 3/5;
+      grid-row: 5/6;
+      height: 15px;
+    }
+    #mainpage .grid #sport {
+      grid-column: 3/5;
+      grid-row: 6/7;
+      height: 15px;
+    }
+    #mainpage .grid #media {
+      margin-left: 6em;
+      margin-top: 40px;
+      grid-column: 3/5;
+      grid-row: 8/9;
+      height: 15px;
+    }
+  .education-section {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    height: 90%;
+  }
+  .education-section::-webkit-scrollbar{
+    display: none;
+  }
+    .resume-list {
+      list-style: none;
+      margin-left: 60px;
+      padding-left: 110px;
+      border-left: 2px solid #40424a;
+    }
+
+    .resume-list li {
+      margin-bottom: 120px;
+      position: relative;
+    }
+
+    .resume-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .resume-list li:after {
+      position: absolute;
+      content: '';
+      width: 15px;
+      height: 15px;
+      border: 2px solid #40424a;
+      border-radius: 50px;
+      background: #cacaca;
+      top: 30px;
+      left: -118px;
+    }
+
+    .resume-list h3 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .resume-list h4 {
+      font-size: 14px;
+      text-transform: uppercase;
+      color:whitesmoke;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+    .resume-list h5 {
+      font-size: 16px;
+      text-transform: uppercase;
+      color:whitesmoke;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+
+    .resume-list p {
+      color: rgb(70, 112, 155);
+      margin-bottom: 0;
+    }
+
+  #skillpage {
+    width: 60%;
+    float: right;
+    margin-top: 3em;
+    margin-right: 20px; 
+    overflow-y: auto;
+  }
+  .skill-page::-webkit-scrollbar{
+    display: none;
+  }
+    .skill-section {
+      margin-left: 2em;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .skill-section::-webkit-scrollbar{
+      display: none;
+    }
+    .skill-section h3 {
+      font-size: 23px ;
+      text-transform: uppercase;
+    }
+
+    .skill-section h4 {
+      font-size: 19px;
+      color:whitesmoke;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+    .skill-section h5 {
+      font-size: 14px;
+      color:whitesmoke;
+    }
+    
+
+.card{
+  background-color:black;
+  border: black;
+}
+
+.collapseshow {
+  background-color: black;
+}
+.card-body {
+  color: white;
+  font-size: 15px;
+}
+.progress {        
+  margin-top: 1px;
+  width: 100%;
+  background: rgb(190, 181, 181);
+  animation: color 0.7s linear 0s alternate;
+}
+
+@keyframes color{
+  10% {
+  background-color: rgb(190, 181, 181);
+  width: 20%;/*At 10%, change the width to 20%*/
+  }
+  40% {
+  background-color: rgb(190, 181, 181);
+  width: 40%;
+  }
+  70% {
+  background-color: rgb(190, 181, 181);
+  width: 60%;
+  }
+  100% {
+  background-color: rgb(190, 181, 181);
+  width: 100%;
+  }
+}
+
+
+  
+  
+
+  
+

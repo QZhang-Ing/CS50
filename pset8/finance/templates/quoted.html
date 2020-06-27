@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <h1>Search Stock Price</h1>
+    <h3>The current stock quote information you are searching for:</h3>
+    <h5>
+        Company Name: {{ price["name"] }}
+    </h5>
+    <p>Symbol: {{price["symbol"]}}, current price is {{price["price"]}}$</p>
+{% endblock %}
